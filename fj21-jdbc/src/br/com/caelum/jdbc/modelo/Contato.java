@@ -2,6 +2,8 @@ package br.com.caelum.jdbc.modelo;
 
 import java.util.Calendar;
 
+import br.com.caelum.jdbc.util.DateUtils;
+
 public class Contato {
 
 	private Long id;
@@ -43,5 +45,11 @@ public class Contato {
 	}
 	public void setDataNascimento(Calendar dataNascimento) {
 		this.dataNascimento = dataNascimento;
+	}
+	
+	@Override
+	public String toString() {
+		return "Contato [id=" + id + ", nome=" + nome + ", email=" + email + ", endereco=" + endereco
+				+ ", dataNascimento=" + DateUtils.format(dataNascimento, "dd/MM/yyyy") + "]";
 	}
 }
