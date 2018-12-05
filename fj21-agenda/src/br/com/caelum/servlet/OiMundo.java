@@ -4,10 +4,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+// A partir da versao 3.0 do servlet
+@WebServlet(urlPatterns = {"/oi", "/ola"})
 public class OiMundo extends HttpServlet {
 
 	private static final long serialVersionUID = 3426823051573616673L;
@@ -26,5 +29,4 @@ public class OiMundo extends HttpServlet {
 		out.println("</body>");
 		out.println("</html>");
 	}
-	
 }
