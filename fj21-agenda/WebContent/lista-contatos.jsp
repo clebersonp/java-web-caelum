@@ -3,6 +3,7 @@
 
 <!-- importar a tag lib do jstl -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -12,10 +13,21 @@
 </head>
 <body>
 
+<!-- importar um arquivo jsp -->
+	<c:import url="cabecalho.jsp" />
+
 	<!--  instanciando um bean com a tag jsp, já é importado em um arquivo jsp default -->
 	<jsp:useBean id="dao" class="br.com.caelum.agenda.dao.ContatoDao" />
 
-	<table>
+	<table border="1px solid #ccc" cellpadding="5px" cellspacing="0">
+	
+		<tr>
+			<th>Nome</th>
+			<th>E-mail</th>
+			<th>Endereço</th>
+			<th>Data Nascimento</th>
+		</tr>
+	
 		<!-- percorre contatos montando as linhas da tabela -->
 		<c:forEach var="contato" items="${dao.lista}">
 			<tr>
@@ -45,10 +57,14 @@
 				</td>
 
 				<td>${contato.endereco}</td>
-				<td>${contato.dataNascimento.time}</td>
+				<td>
+					<fmt:formatDate value="${contato.dataNascimento.time}" pattern="dd/MM/yyyy"/>
+				</td>
 			</tr>
 		</c:forEach>
 	</table>
-
+	
+	<!-- importar o rodape jsp -->
+	<c:import url="rodape.jsp" />
 </body>
 </html>

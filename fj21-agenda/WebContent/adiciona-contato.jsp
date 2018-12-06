@@ -1,10 +1,15 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Adiciona contato</title>
 </head>
 <body>
+	<c:import url="cabecalho.jsp" />
+
 	<h1>Adiciona contato</h1>
 	<hr/>
 	
@@ -24,5 +29,7 @@
 		
 		<input type="submit" value="Enviar">
 	</form>
+	
+	<c:import url="rodape.jsp" />
 </body>
 </html>
