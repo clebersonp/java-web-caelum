@@ -29,8 +29,8 @@
 		</tr>
 	
 		<!-- percorre contatos montando as linhas da tabela -->
-		<c:forEach var="contato" items="${dao.lista}">
-			<tr>
+		<c:forEach var="contato" items="${dao.lista}" varStatus="status">
+			<tr style="background-color: ${status.index % 2 eq 0 ? '#eee' : '#fff'}">
 				<td>${contato.nome}</td>
 
 				<td>
