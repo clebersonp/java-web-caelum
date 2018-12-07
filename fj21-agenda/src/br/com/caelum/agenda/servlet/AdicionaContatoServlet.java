@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,9 +28,6 @@ public class AdicionaContatoServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		
-		// recupera o writer da response
-		PrintWriter pw = res.getWriter();
-		
 		// recupera os dados digitados no form
 		String nome = req.getParameter("nome");
 		String email = req.getParameter("email");
@@ -48,15 +46,11 @@ public class AdicionaContatoServlet extends HttpServlet {
 		ContatoDao dao = new ContatoDao();
 		dao.adiciona(contato);
 		
-		pw.println("<html>");
-		pw.println("<head>");
-		pw.println("<meta charset='UTF-8'>");
-		pw.println("</head>");
-		pw.println("<body>");
-		pw.println("Contato " + contato.getNome() + " adicionado com sucesso!");
-		pw.println("</body>");
-		pw.println("</html>");
+		// recuperando o dispacher para seguir em frente com o request passando qual sera minha jsp processada
+		RequestDispatcher rd = req.getRequestDispatcher("contato-adicionado.jsp");
 		
+		// pede para seguir em frente com a requisicao
+		rd.forward(req, res);
 		
 	}
 	
