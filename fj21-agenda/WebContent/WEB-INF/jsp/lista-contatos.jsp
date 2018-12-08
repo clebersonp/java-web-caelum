@@ -17,7 +17,9 @@
 	<c:import url="cabecalho.jsp" />
 
 	<!--  instanciando um bean com a tag jsp, já é importado em um arquivo jsp default -->
-	<jsp:useBean id="dao" class="br.com.caelum.agenda.dao.ContatoDao" />
+	
+	<!-- agora a logica fara isso para nos e adicionara a lista de contatos como attribute da requisicao -->
+<%-- 	<jsp:useBean id="dao" class="br.com.caelum.agenda.dao.ContatoDao" /> --%>
 
 	<table border="1px solid #ccc" cellpadding="5px" cellspacing="0">
 	
@@ -26,10 +28,15 @@
 			<th>E-mail</th>
 			<th>Endereço</th>
 			<th>Data Nascimento</th>
+			<th>Ação</th>
 		</tr>
 	
 		<!-- percorre contatos montando as linhas da tabela -->
-		<c:forEach var="contato" items="${dao.lista}" varStatus="status">
+			<!-- nao usaremos mais dessa forma pois iremos recuperar a lista de contatos do backend pelo attribute contatos -->
+<%-- 		<c:forEach var="contato" items="${dao.lista}" varStatus="status"> --%>
+
+			<!-- o attribute contatos, configurado no request sera utilizado diretamente via expression language -->
+			<c:forEach var="contato" items="${contatos}" varStatus="status">
 			<tr style="background-color: ${status.index % 2 eq 0 ? '#eee' : '#fff'}">
 				<td>${contato.nome}</td>
 
@@ -59,6 +66,9 @@
 				<td>${contato.endereco}</td>
 				<td>
 					<fmt:formatDate value="${contato.dataNascimento.time}" pattern="dd/MM/yyyy"/>
+				</td>
+				<td>
+					<a href="mvc?logica=RemoveContatoLogic&id=${contato.id}">Remover</a>
 				</td>
 			</tr>
 		</c:forEach>
