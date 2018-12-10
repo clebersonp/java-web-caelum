@@ -15,12 +15,16 @@ import br.com.caelum.agenda.modelo.Contato;
 public class ContatoDao {
 	private Connection connection;
 
-	public ContatoDao() {
-		try {
+	public ContatoDao(Connection connection) {
+		this.connection = connection;
+		
+		// Utilizando o conceito de Inversão de controle. Ou seja, não sera mais o ContatoDao responsavel por criar uma conexao com o banco.
+		// mais ele recepera uma connection já pronta. Dessa forma removemos responsabilidades de mais de contato dao.
+		/*try {
 			this.connection = new ConnectionFactory().getConnection();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
-		}
+		}*/
 	}
 
 	public void adiciona(Contato contato) {

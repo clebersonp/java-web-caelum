@@ -1,7 +1,7 @@
 package br.com.caelum.agenda.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.Connection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.caelum.agenda.dao.ContatoDao;
+import br.com.caelum.agenda.filtro.FiltroConexao;
 import br.com.caelum.agenda.modelo.Contato;
 
 @WebServlet("/adicionaContato")
@@ -27,6 +28,9 @@ public class AdicionaContatoServlet extends HttpServlet {
 	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		
+		// recupera a connection que foi passada como atributo pelo filtro de conexao
+		Connection connection = (Connection) req.getAttribute(FiltroConexao.CHAVE_CONNECTION);
 		
 		// recupera os dados digitados no form
 		String nome = req.getParameter("nome");
@@ -43,7 +47,7 @@ public class AdicionaContatoServlet extends HttpServlet {
 		contato.setDataNascimento(dataNascimento);
 
 		// salvar no banco de dados
-		ContatoDao dao = new ContatoDao();
+		ContatoDao dao = new ContatoDao(connection);
 		dao.adiciona(contato);
 		
 		// recuperando o dispacher para seguir em frente com o request passando qual sera minha jsp processada
