@@ -8,5 +8,15 @@ create table contatos (
     primary key (id)
 );
 
+-- criacao da tabela de tarefas
+CREATE TABLE tarefas (
+  id bigint(20) NOT NULL AUTO_INCREMENT,
+  descricao varchar(255) DEFAULT NULL,
+  email varchar(255) DEFAULT NULL,
+  finalizado boolean,
+  dataFinalizado date DEFAULT NULL,
+  PRIMARY KEY (id)
+);
+
 
 
