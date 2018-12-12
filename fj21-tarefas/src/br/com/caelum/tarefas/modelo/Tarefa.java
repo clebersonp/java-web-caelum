@@ -13,7 +13,7 @@ public class Tarefa {
 	
 	private boolean finalizado;
 	
-	private Calendar dataFinalizacao;
+	private Calendar dataFinalizado;
 
 	public Long getId() {
 		return id;
@@ -39,12 +39,11 @@ public class Tarefa {
 		this.finalizado = finalizado;
 	}
 
-	public Calendar getDataFinalizacao() {
-		return dataFinalizacao;
+	public Calendar getDataFinalizado() {
+		return dataFinalizado;
 	}
 
-	public void setDataFinalizacao(Calendar dataFinalizacao) {
-		this.dataFinalizacao = dataFinalizacao;
+	public void setDataFinalizado(Calendar dataFinalizado) {
+		this.dataFinalizado = dataFinalizado;
 	}
-
 }

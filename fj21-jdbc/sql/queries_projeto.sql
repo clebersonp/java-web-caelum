@@ -18,5 +18,7 @@ CREATE TABLE tarefas (
   PRIMARY KEY (id)
 );
 
+select * from tarefas;
 
+-- update tarefas set finalizado = 1 where id = 1;
 

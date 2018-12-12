@@ -1,8 +1,11 @@
 package br.com.caelum.tarefas.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -30,6 +33,15 @@ public class TarefasController {
 		final JdbcTarefaDao dao = new JdbcTarefaDao();
 		dao.adiciona(tarefa);
 		return "tarefa/adicionada";
+	}
+	
+	@RequestMapping("listaTarefas") // mapeamento da url
+	public String lista(final Model model) { // spring injeta um Model para passar algo para a jsp
+		final JdbcTarefaDao dao = new JdbcTarefaDao();
+		final List<Tarefa> tarefas = dao.lista();
+		model.addAttribute("tarefas", tarefas); // semelhando ao HttpServletRequest.setAttribute
+		
+		return "tarefa/lista"; // retorna uma pagina jsp
 	}
 	
 	/*@RequestMapping("adicionaTarefa")
