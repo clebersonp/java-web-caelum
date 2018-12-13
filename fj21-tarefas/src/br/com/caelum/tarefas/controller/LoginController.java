@@ -14,7 +14,7 @@ public class LoginController {
 	// criando o mapeamento para retornar a pagina de login, pois esta dentro de web-inf e o usuario nao acessa diretamente
 	@RequestMapping("loginForm")
 	public String loginForm() {
-		return "formulario-login";
+		return "formulario-login"; // irar procurar a jsp para processar
 	}
 	
 	// mapeando o request do form de login
@@ -31,5 +31,13 @@ public class LoginController {
 			return "menu";
 		}
 		return "redirect:loginForm";
+	}
+	
+	
+	// Acao de logout, injetando a session para invalida-la
+	@RequestMapping("logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:loginForm"; // fazendo um redirect para a acao loginForm
 	}
 }

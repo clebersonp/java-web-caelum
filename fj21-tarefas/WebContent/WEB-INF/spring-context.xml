@@ -36,5 +36,10 @@
 		
 	 -->
 	<mvc:default-servlet-handler/>
+	
+	<!-- registrando nossos interceptors -->
+	<mvc:interceptors>
+		<bean class="br.com.caelum.tarefas.interceptor.AutorizadorInterceptor" />
+	</mvc:interceptors>
 
 </beans>

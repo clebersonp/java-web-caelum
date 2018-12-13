@@ -21,5 +21,8 @@
 <%-- chamando a action listaTarefas na controller --%>
 <a href="listaTarefas">Listar Tarefas</a> <br />
 
+<%-- fazendo o logout --%>
+<a href="logout">Sair do sistema</a>
+
 </body>
 </html>
