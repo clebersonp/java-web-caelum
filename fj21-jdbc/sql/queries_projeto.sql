@@ -22,3 +22,15 @@ select * from tarefas;
 
 -- update tarefas set finalizado = 1 where id = 1;
 
+
+-- criar a tabela de usuarios
+CREATE TABLE usuarios (
+	login VARCHAR(255),
+    senha VARCHAR(255)
+);
+
+insert into usuarios values ('cleberson', 1234);
+
+select * from usuarios;
+
+

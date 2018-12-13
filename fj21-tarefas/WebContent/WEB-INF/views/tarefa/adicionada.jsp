@@ -9,6 +9,13 @@
 <title>Tarefa Adicionada</title>
 </head>
 <body>
-	<h2>Nova Tarefa "${tarefa.descricao}" adiciona com sucesso!!!!</h2> 
+	<h2>Nova Tarefa "${tarefa.descricao}" adiciona com sucesso!!!!</h2> <br />
+	
+	<%-- chamando a action novaTarefa na controller --%>
+	<a href="novaTarefa">Nova Tarefa</a> <br />
+
+	<%-- chamando a action listaTarefas na controller --%>
+	<a href="listaTarefas">Listar Tarefas</a> <br /> 
+	
 </body>
 </html>

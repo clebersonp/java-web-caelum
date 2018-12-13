@@ -28,4 +28,9 @@
 		<url-pattern>/</url-pattern><!-- se eu usar /* tudo e qualquer outro mapeamento sera sobrescrito, por isso so o / -->
 	</servlet-mapping>
 	
+	<!-- configurar o tempo da session do servidor em minutos. -->
+	<session-config>
+		<session-timeout>3</session-timeout>
+	</session-config>
+	
 </web-app>
