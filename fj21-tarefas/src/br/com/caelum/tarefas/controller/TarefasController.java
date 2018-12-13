@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.caelum.tarefas.dao.JdbcTarefaDao;
 import br.com.caelum.tarefas.modelo.Tarefa;
@@ -42,6 +43,39 @@ public class TarefasController {
 		model.addAttribute("tarefas", tarefas); // semelhando ao HttpServletRequest.setAttribute
 		
 		return "tarefa/lista"; // retorna uma pagina jsp
+	}
+	
+	@RequestMapping("removeTarefa")
+	public String remove(final Tarefa tarefa) { // o spring mvc vai injetar a instancia tarefa, passando o valor da tela no campo id para o campo do objeto
+		final JdbcTarefaDao dao = new JdbcTarefaDao();
+		dao.remove(tarefa);
+		return "redirect:listaTarefas"; // redirect vao ter 2 requisicoes, na primeira vai retornar um 302 status code
+		// return "foward:listaTarefas"; // foward vai fazer apenas uma requisicao, parecido com o foward do requestdispatcher
+	}
+	
+	@RequestMapping("mostraTarefa")
+	public String mostra(Long id, Model model) {
+		final JdbcTarefaDao dao = new JdbcTarefaDao();
+		Tarefa tarefaDoBanco = dao.buscaPorId(id);
+		
+		model.addAttribute("tarefa", tarefaDoBanco);
+		
+		return "tarefa/mostra";
+	}
+	
+	@RequestMapping("alteraTarefa")
+	public String altera(final Tarefa tarefa) {
+		final JdbcTarefaDao dao = new JdbcTarefaDao();
+		dao.altera(tarefa);
+		
+		return "redirect:listaTarefas";
+	}
+	
+	@ResponseBody // retorna 200 OK como default
+	@RequestMapping("finalizaTarefa")
+	public void finaliza(Long id) {
+		final JdbcTarefaDao dao = new JdbcTarefaDao();
+		dao.finaliza(id);
 	}
 	
 	/*@RequestMapping("adicionaTarefa")

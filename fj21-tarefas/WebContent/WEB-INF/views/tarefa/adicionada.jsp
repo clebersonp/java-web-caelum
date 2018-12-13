@@ -9,6 +9,6 @@
 <title>Tarefa Adicionada</title>
 </head>
 <body>
-	<h2>Nova Tarefa "${tarefa}" adiciona com sucesso!!!!</h2> 
+	<h2>Nova Tarefa "${tarefa.descricao}" adiciona com sucesso!!!!</h2> 
 </body>
 </html>

@@ -1,3 +1,4 @@
+<%@page import="br.com.caelum.agenda.ConnectionFactory"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -28,7 +29,7 @@
 		</tr>
 		
 		<%
-			ContatoDao dao = new ContatoDao();
+			ContatoDao dao = new ContatoDao(new ConnectionFactory().getConnection());
 			List<Contato> contatos = dao.getLista();
 			
 			for (Contato contato : contatos) {
