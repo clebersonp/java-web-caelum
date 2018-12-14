@@ -8,18 +8,31 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import br.com.caelum.tarefas.modelo.Tarefa;
-import br.com.caelum.tarefas.ConnectionFactory;
 
+@Repository // sera gerenciado pelo spring
 public class JdbcTarefaDao {
-	private final Connection connection;
+	private Connection connection;
 
-	public JdbcTarefaDao() {
+	@Autowired // injetara o datasource configurado em spring-context.xml
+	public JdbcTarefaDao(DataSource dataSource) {
+	
 		try {
-			this.connection = new ConnectionFactory().getConnection();
+			this.connection = dataSource.getConnection();
+		} catch (SQLException e) {
+		}
+		
+		/*try {
+			this.connection = new ConnectionFactory_NaoUsar().getConnection();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
-		}
+		}*/
 	}
 
 	public void adiciona(Tarefa tarefa) {

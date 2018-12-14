@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class ConnectionFactory {
+public class ConnectionFactory_NaoUsar {
 
 	public Connection getConnection() throws SQLException {
 		System.out.println("conectando ...");

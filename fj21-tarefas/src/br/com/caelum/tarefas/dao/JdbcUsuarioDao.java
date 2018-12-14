@@ -5,18 +5,31 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import br.com.caelum.tarefas.ConnectionFactory;
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import br.com.caelum.tarefas.modelo.Usuario;
 
+@Repository // sera gerenciado pelo spring
 public class JdbcUsuarioDao {
 	private Connection connection;
 
-	public JdbcUsuarioDao() {
+	@Autowired // sera injetado pelo spring a partir da configuracao do bean no spring-context.xml
+	public JdbcUsuarioDao(DataSource dataSource) {
+		
 		try {
-			connection = new ConnectionFactory().getConnection();
+			this.connection = dataSource.getConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		/*try {
+			connection = new ConnectionFactory_NaoUsar().getConnection();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
-		}
+		}*/
 	}
 
 	public boolean existeUsuario(Usuario usuario) {

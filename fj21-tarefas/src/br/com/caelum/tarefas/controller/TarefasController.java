@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,9 +14,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import br.com.caelum.tarefas.dao.JdbcTarefaDao;
 import br.com.caelum.tarefas.modelo.Tarefa;
 
-@Controller
+@Controller // ja esta sendo gerenciado pelo spring
 public class TarefasController {
 
+	private JdbcTarefaDao dao;
+
+	@Autowired // injetara pois o JdbcTarefaDao esta sendo gerenciado pelo spring atraves da annotation @Repository
+	public TarefasController(JdbcTarefaDao dao) {
+		this.dao = dao;
+	}
+	
 	// mapeamento da url
 	@RequestMapping("novaTarefa")
 	public String form() {
@@ -31,14 +39,12 @@ public class TarefasController {
 			return "tarefa/formulario"; // continua na mesma pagina
 		}
 		
-		final JdbcTarefaDao dao = new JdbcTarefaDao();
 		dao.adiciona(tarefa);
 		return "tarefa/adicionada";
 	}
 	
 	@RequestMapping("listaTarefas") // mapeamento da url
 	public String lista(final Model model) { // spring injeta um Model para passar algo para a jsp
-		final JdbcTarefaDao dao = new JdbcTarefaDao();
 		final List<Tarefa> tarefas = dao.lista();
 		model.addAttribute("tarefas", tarefas); // semelhando ao HttpServletRequest.setAttribute
 		
@@ -47,7 +53,6 @@ public class TarefasController {
 	
 	@RequestMapping("removeTarefa")
 	public String remove(final Tarefa tarefa) { // o spring mvc vai injetar a instancia tarefa, passando o valor da tela no campo id para o campo do objeto
-		final JdbcTarefaDao dao = new JdbcTarefaDao();
 		dao.remove(tarefa);
 		return "redirect:listaTarefas"; // redirect vao ter 2 requisicoes, na primeira vai retornar um 302 status code
 		// return "foward:listaTarefas"; // foward vai fazer apenas uma requisicao, parecido com o foward do requestdispatcher
@@ -55,7 +60,6 @@ public class TarefasController {
 	
 	@RequestMapping("mostraTarefa")
 	public String mostra(Long id, Model model) {
-		final JdbcTarefaDao dao = new JdbcTarefaDao();
 		Tarefa tarefaDoBanco = dao.buscaPorId(id);
 		
 		model.addAttribute("tarefa", tarefaDoBanco);
@@ -65,7 +69,6 @@ public class TarefasController {
 	
 	@RequestMapping("alteraTarefa")
 	public String altera(final Tarefa tarefa) {
-		final JdbcTarefaDao dao = new JdbcTarefaDao();
 		dao.altera(tarefa);
 		
 		return "redirect:listaTarefas";
@@ -74,7 +77,6 @@ public class TarefasController {
 	@ResponseBody // retorna 200 OK como default
 	@RequestMapping("finalizaTarefa")
 	public void finaliza(Long id) {
-		final JdbcTarefaDao dao = new JdbcTarefaDao();
 		dao.finaliza(id);
 	}
 	
