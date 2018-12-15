@@ -33,4 +33,8 @@ insert into usuarios values ('cleberson', 1234);
 
 select * from usuarios;
 
+show tables;
+
+select * from Tarefa;
+
 
